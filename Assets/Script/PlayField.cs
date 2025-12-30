@@ -22,7 +22,7 @@ public class PlayField : MonoBehaviour
     {
         transform.DOMoveY(transform.position.y + 1.05f, 0.1f);
 
-        if (count > 4)
+        if (count > 2)
             cameraTrasnform.DOMoveY(cameraTrasnform.position.y + 1.05f, 0.1f);
         else
             count++;
