@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7609460603913168634}
   m_Layer: 0
   m_Name: Cat
-  m_TagString: IceCream
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,10 +175,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1173635495215541819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025eef11695f48f4482b87fcb7287aaa, type: 3}
+  m_Script: {fileID: 11500000, guid: 5320138601138fa4299c048d90b8ceeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iceCreamSprites:
-  - {fileID: 1248085615350243386, guid: 4340ec56b0d04af4a8375ca6154dcaf8, type: 3}
-  - {fileID: 1248085615350243386, guid: 4340ec56b0d04af4a8375ca6154dcaf8, type: 3}
+  catSprites:
   - {fileID: 1248085615350243386, guid: 4340ec56b0d04af4a8375ca6154dcaf8, type: 3}
