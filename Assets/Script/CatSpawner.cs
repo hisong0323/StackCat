@@ -2,26 +2,26 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class IceCreamSpawner : MonoBehaviour
+public class CatSpawner : MonoBehaviour
 {
     #region SerializeField
 
     [SerializeField]
-    private IceCream iceCreamPrefab;
+    private Cat catPrefab;
 
     [SerializeField]
-    private IceCreamPool iceCreamPool;
+    private CatPool catPool;
 
     [SerializeField]
-    private AudioClip iceCreamDropSound;
+    private AudioClip catDropSoud;
 
     #endregion
 
-    public static Action IceCreamDropEvent;
+    public static Action CatDropEvent;
 
     #region private
 
-    private IceCream _iceCream;
+    private Cat _cat;
 
     private int direction = 1;
     private int speed = 5;
@@ -36,14 +36,14 @@ public class IceCreamSpawner : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.TouchEvent += DropIceCream;
-        GameManager.GameStartEvent += IceCreamSpawn;
+        GameManager.TouchEvent += DropCat;
+        GameManager.GameStartEvent += CatSpawn;
     }
 
     private void OnDestroy()
     {
-        GameManager.TouchEvent -= DropIceCream;
-        GameManager.GameStartEvent -= IceCreamSpawn;
+        GameManager.TouchEvent -= DropCat;
+        GameManager.GameStartEvent -= CatSpawn;
     }
 
     private void Update()
@@ -54,7 +54,7 @@ public class IceCreamSpawner : MonoBehaviour
             if (timer >= 0.5f)
             {
                 timer = 0;
-                IceCreamSpawn();
+                CatSpawn();
                 canSpawn = false;
             }
         }
@@ -73,25 +73,25 @@ public class IceCreamSpawner : MonoBehaviour
             direction *= -1;
     }
 
-    private void DropIceCream()
+    private void DropCat()
     {
-        if (_iceCream != null)
+        if (_cat != null)
         {
-            iceCreamPool.Register(_iceCream.gameObject);
+            catPool.Register(_cat.gameObject);
 
-            _iceCream.GetComponent<Rigidbody2D>().simulated = true;
-            _iceCream = null;
+            _cat.GetComponent<Rigidbody2D>().simulated = true;
+            _cat = null;
 
-            SoundManager.Instance.PlaySFX(iceCreamDropSound);
-            IceCreamDropEvent();
+            SoundManager.Instance.PlaySFX(catDropSoud);
+            CatDropEvent();
 
             canSpawn = true;
         }
     }
 
-    public void IceCreamSpawn()
+    public void CatSpawn()
     {
-        _iceCream = Instantiate(iceCreamPrefab, gameObject.transform);
-        _iceCream.Init(order++);
+        _cat = Instantiate(catPrefab, gameObject.transform);
+        _cat.Init(order++);
     }
 }

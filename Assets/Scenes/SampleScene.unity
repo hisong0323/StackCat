@@ -837,7 +837,7 @@ SpriteRenderer:
   m_Size: {x: 6.96875, y: 6.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &546002361
@@ -1319,7 +1319,7 @@ SpriteRenderer:
   m_Size: {x: 2.23, y: 2.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1268718907
@@ -2076,7 +2076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iceCreamPrefab: {fileID: 7609460603913168634, guid: 7bbd57dced6fe1d4cb399f3dd4b646ab, type: 3}
   iceCreamPool: {fileID: 503078919}
-  iceCreamDropSound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  iceCreamDropSound: {fileID: 8300000, guid: ea8298a859043ab4fa75211e51e05026, type: 3}
 --- !u!4 &1891561749
 Transform:
   m_ObjectHideFlags: 0

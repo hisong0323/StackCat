@@ -10,12 +10,12 @@ public class PlayField : MonoBehaviour
 
     private void Awake()
     {
-        IceCreamSpawner.IceCreamDropEvent += MoveUp;
+        CatSpawner.CatDropEvent += MoveUp;
     }
 
     private void OnDestroy()
     {
-        IceCreamSpawner.IceCreamDropEvent -= MoveUp;
+        CatSpawner.CatDropEvent -= MoveUp;
     }
 
     private void MoveUp()
