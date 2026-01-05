@@ -1,6 +1,7 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System;
+using System.Collections;
+using Random = UnityEngine.Random;
 
 public class CatSpawner : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class CatSpawner : MonoBehaviour
     private CatPool catPool;
 
     [SerializeField]
-    private AudioClip catDropSoud;
+    private AudioClip[] catDropSouds;
 
     #endregion
 
@@ -28,10 +29,7 @@ public class CatSpawner : MonoBehaviour
 
     private int order = 11;
 
-    private float timer;
-
-    private bool canSpawn = false;
-
+    private WaitForSeconds wait05 = new WaitForSeconds(0.5f);
     #endregion
 
     private void Awake()
@@ -44,20 +42,6 @@ public class CatSpawner : MonoBehaviour
     {
         GameManager.TouchEvent -= DropCat;
         GameManager.GameStartEvent -= CatSpawn;
-    }
-
-    private void Update()
-    {
-        if (canSpawn)
-        {
-            timer += Time.deltaTime;
-            if (timer >= 0.5f)
-            {
-                timer = 0;
-                CatSpawn();
-                canSpawn = false;
-            }
-        }
     }
 
     private void FixedUpdate()
@@ -82,16 +66,22 @@ public class CatSpawner : MonoBehaviour
             _cat.GetComponent<Rigidbody2D>().simulated = true;
             _cat = null;
 
-            SoundManager.Instance.PlaySFX(catDropSoud);
+            int randomInt = Random.Range(0, catDropSouds.Length);
+            SoundManager.Instance.PlaySFX(catDropSouds[randomInt]);
             CatDropEvent();
-
-            canSpawn = true;
+            CatSpawn();
         }
+    }
+
+    private IEnumerator CatSpawnCoroutine()
+    {
+        yield return wait05;
+        _cat = Instantiate(catPrefab, gameObject.transform);
+        _cat.Init(order++);
     }
 
     public void CatSpawn()
     {
-        _cat = Instantiate(catPrefab, gameObject.transform);
-        _cat.Init(order++);
+        StartCoroutine(CatSpawnCoroutine());
     }
 }

@@ -2290,7 +2290,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   catPrefab: {fileID: 7609460603913168634, guid: 7bbd57dced6fe1d4cb399f3dd4b646ab, type: 3}
   catPool: {fileID: 503078919}
-  catDropSoud: {fileID: 8300000, guid: ea8298a859043ab4fa75211e51e05026, type: 3}
+  catDropSouds:
+  - {fileID: 8300000, guid: ea8298a859043ab4fa75211e51e05026, type: 3}
+  - {fileID: 8300000, guid: c2b43e1eb449fab42b3bf32fabe52586, type: 3}
 --- !u!4 &1891561749
 Transform:
   m_ObjectHideFlags: 0
