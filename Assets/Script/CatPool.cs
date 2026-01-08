@@ -27,9 +27,10 @@ public class CatPool : MonoBehaviour
     {
         catPool.Add(gameObject);
         gameObject.transform.parent = transform;
-        if (catPool.Count >= 15)
+        if (catPool.Count >= 10)
         {
-            Destroy(catPool[catPool.Count - 15].gameObject.GetComponent<Rigidbody2D>());
+            catPool[catPool.Count - 10].gameObject.transform.rotation = Quaternion.identity;
+            Destroy(catPool[catPool.Count - 10].gameObject.GetComponent<Rigidbody2D>());
         }
     }
 
@@ -43,9 +44,8 @@ public class CatPool : MonoBehaviour
         for (int i = 0; i < catPool.Count; i++)
         {
             catPool[i].gameObject.transform.rotation = Quaternion.identity;
-            catPool[i].gameObject.transform.position = Vector3.up * (i + 1.5f) * 1.05f;
+            catPool[i].gameObject.transform.position = Vector3.up * (i + 1) * 1.06f;
             Destroy(catPool[i].gameObject.GetComponent<Rigidbody2D>());
-            Debug.Log(Vector3.up * (i + 2.2f) * 0.5f);
         }
     }
 }

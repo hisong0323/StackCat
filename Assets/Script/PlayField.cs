@@ -20,10 +20,10 @@ public class PlayField : MonoBehaviour
 
     private void MoveUp()
     {
-        transform.DOMoveY(transform.position.y + 1.05f, 0.1f);
+        transform.DOMoveY(transform.position.y + 1.06f, 0.1f);
 
         if (count > 2)
-            cameraTrasnform.DOMoveY(cameraTrasnform.position.y + 1.05f, 0.1f);
+            cameraTrasnform.DOMoveY(cameraTrasnform.position.y + 1.06f, 0.1f);
         else
             count++;
     }
