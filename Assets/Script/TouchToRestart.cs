@@ -6,6 +6,6 @@ public class TouchToRestart : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GameScene");
     }
 }

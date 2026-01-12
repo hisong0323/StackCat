@@ -1,42 +1,40 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action TouchEvent;
+    public static GameManager Instance;
+
     public static Action GameStartEvent;
     public static Action GameOverEvent;
     public static Action GameEndEvent;
     public static Action ReviveEvent;
 
+    public bool IsGameOver { get; private set; }
+    public bool HasRevive { get; private set; } 
+
     private void Awake()
     {
-        GameStartEvent += UnfreezeTime;
-        GameOverEvent += FreezeTime;
-        ReviveEvent += UnfreezeTime;
+        Instance = this;
+        GameOverEvent += OnGameEnd;
+        ReviveEvent += OnRevive;
     }
 
     private void OnDestroy()
     {
-        GameOverEvent -= FreezeTime;
-        GameStartEvent -= UnfreezeTime;
+        GameOverEvent -= OnGameEnd;
+        ReviveEvent -= OnRevive;
     }
 
-    private void Update()
+    private void OnGameEnd()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetMouseButtonDown(0))
-        {
-            TouchEvent?.Invoke();
-        }
+        IsGameOver = true;
     }
 
-    private void FreezeTime()
+    private void OnRevive()
     {
-        Time.timeScale = 0;
-    }
-
-    private void UnfreezeTime()
-    {
-        Time.timeScale = 1;
+        HasRevive = true;
+        IsGameOver = false;
     }
 }

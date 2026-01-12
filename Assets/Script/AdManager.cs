@@ -18,6 +18,7 @@ public class AdManager : MonoBehaviour
         MobileAds.Initialize((InitializationStatus status) =>
         {
             LoadBanner();
+            LoadFrontAd();
             LoadRewardAd();
         });
     }
@@ -71,7 +72,7 @@ public class AdManager : MonoBehaviour
         };
     }
 
-    private void ShowFrontAd()
+    public void ShowFrontAd()
     {
         if (_frontAd != null && _frontAd.CanShowAd())
         {
@@ -106,6 +107,7 @@ public class AdManager : MonoBehaviour
         _rewardAd.OnAdFullScreenContentClosed += () =>
         {
             LoadRewardAd();
+            GameManager.ReviveEvent?.Invoke();
         };
 
         _rewardAd.OnAdFullScreenContentFailed += (AdError error) =>
@@ -114,13 +116,12 @@ public class AdManager : MonoBehaviour
         };
     }
 
-    private void ShowRewardAd()
+    public void ShowRewardAd()
     {
         if (_rewardAd != null && _rewardAd.CanShowAd())
         {
             _rewardAd.Show((Reward reward) =>
             {
-                Debug.Log("¾È³ç");
             });
         }
     }

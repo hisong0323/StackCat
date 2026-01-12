@@ -22,6 +22,7 @@ public class Cat : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         ScoreManager.Instance.IncreasesScore(1);
+        GetComponent<Rigidbody2D>().mass = 100; 
         Destroy(this);
     }
 }

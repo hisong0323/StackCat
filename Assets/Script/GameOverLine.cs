@@ -8,8 +8,14 @@ public class GameOverLine : MonoBehaviour
         {
             if (rigidbody.linearVelocity.y < -1)
             {
-                Debug.Log("게임오버");
-                GameManager.GameOverEvent?.Invoke();
+                if (!GameManager.Instance.HasRevive && ScoreManager.Instance.CurrentScore >= 20)
+                {
+                    GameManager.GameOverEvent?.Invoke();
+                }
+                else
+                {
+                    GameManager.GameEndEvent?.Invoke();
+                }
             }
         }
     }

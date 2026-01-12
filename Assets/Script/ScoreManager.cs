@@ -7,31 +7,59 @@ public class ScoreManager : MonoBehaviour
 
     public static Action<int> ChangeScoreEvent;
 
-    private int _score;
+    private int currentScore;
+
+    private int adScore;
+
+    public int CurrentScore => currentScore;
 
     private void Awake()
     {
         Instance = this;
-        GameManager.GameOverEvent += UpdateBestScore;
+        GameManager.GameStartEvent += ShowAd;
     }
 
     private void OnDestroy()
     {
-        GameManager.GameOverEvent -= UpdateBestScore;
+        GameManager.GameStartEvent -= ShowAd;
+    }
+
+    private void Start()
+    {
+        adScore = PlayerPrefs.GetInt("AdScore", 0);
     }
 
     public void IncreasesScore(int score)
     {
-        _score += score;
+        if (GameManager.Instance.IsGameOver)
+            return;
 
-        ChangeScoreEvent?.Invoke(_score);
+        currentScore += score;
+
+        ChangeScoreEvent?.Invoke(currentScore);
+        UpdateBestScore();
     }
 
     private void UpdateBestScore()
     {
-        if (_score > PlayerPrefs.GetInt("BestScore", 0))
+        if (currentScore > PlayerPrefs.GetInt("BestScore", 0))
         {
-            PlayerPrefs.SetInt("BestScore", _score);
+            PlayerPrefs.SetInt("BestScore", currentScore);
+        }
+    }
+
+    private void ShowAd()
+    {
+        adScore += currentScore;
+
+        if (adScore >= 50)
+        {
+            PlayerPrefs.SetInt("AdScore", 0);
+            AdManager.Instance.ShowFrontAd();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("AdScore", adScore);
         }
     }
 }

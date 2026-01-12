@@ -29,24 +29,39 @@ public class CatSpawner : MonoBehaviour
 
     private int order = 11;
 
-    private WaitForSeconds wait05 = new WaitForSeconds(0.5f);
+    private WaitForSeconds wait07 = new WaitForSeconds(0.7f);
     #endregion
 
     private void Awake()
     {
-        GameManager.TouchEvent += DropCat;
         GameManager.GameStartEvent += CatSpawn;
     }
 
     private void OnDestroy()
     {
-        GameManager.TouchEvent -= DropCat;
         GameManager.GameStartEvent -= CatSpawn;
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.IsGameOver)
+            return;
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            DropCat();
+        }
+
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
+        {
+            DropCat();
+        }
+#endif
+    }
     private void FixedUpdate()
     {
-       // Move();
+        Move();
     }
 
     private void Move()
@@ -75,7 +90,7 @@ public class CatSpawner : MonoBehaviour
 
     private IEnumerator CatSpawnCoroutine()
     {
-        yield return wait05;
+        yield return wait07;
         _cat = Instantiate(catPrefab, gameObject.transform);
         _cat.Init(order++);
     }
