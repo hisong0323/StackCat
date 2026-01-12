@@ -29,7 +29,7 @@ public class CatSpawner : MonoBehaviour
 
     private int order = 11;
 
-    private WaitForSeconds wait07 = new WaitForSeconds(0.7f);
+    private WaitForSeconds wait06 = new WaitForSeconds(0.6f);
     #endregion
 
     private void Awake()
@@ -90,7 +90,7 @@ public class CatSpawner : MonoBehaviour
 
     private IEnumerator CatSpawnCoroutine()
     {
-        yield return wait07;
+        yield return wait06;
         _cat = Instantiate(catPrefab, gameObject.transform);
         _cat.Init(order++);
     }

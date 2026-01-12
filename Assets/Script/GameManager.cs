@@ -17,17 +17,19 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        GameOverEvent += OnGameEnd;
+        GameOverEvent += OnGameOver;
+        GameEndEvent += OnGameOver;
         ReviveEvent += OnRevive;
     }
 
     private void OnDestroy()
     {
-        GameOverEvent -= OnGameEnd;
+        GameOverEvent -= OnGameOver;
+        GameEndEvent -= OnGameOver;
         ReviveEvent -= OnRevive;
     }
 
-    private void OnGameEnd()
+    private void OnGameOver()
     {
         IsGameOver = true;
     }

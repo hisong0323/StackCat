@@ -16,12 +16,12 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        GameManager.GameStartEvent += ShowAd;
+        GameManager.GameEndEvent += ShowAd;
     }
 
     private void OnDestroy()
     {
-        GameManager.GameStartEvent -= ShowAd;
+        GameManager.GameEndEvent -= ShowAd;
     }
 
     private void Start()
