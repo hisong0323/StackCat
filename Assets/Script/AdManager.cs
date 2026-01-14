@@ -4,6 +4,7 @@ using GoogleMobileAds.Api;
 public class AdManager : MonoBehaviour
 {
     public static AdManager Instance { get; private set; }
+
     private BannerView _bannerAd;
     private InterstitialAd _frontAd;
     private RewardedAd _rewardAd;
