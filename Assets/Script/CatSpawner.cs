@@ -16,6 +16,8 @@ public class CatSpawner : MonoBehaviour
     [SerializeField]
     private AudioClip[] catDropSouds;
 
+    [SerializeField]
+    private bool isMove;
     #endregion
 
     public static Action CatDropEvent;
@@ -35,11 +37,15 @@ public class CatSpawner : MonoBehaviour
     private void Awake()
     {
         GameManager.GameStartEvent += CatSpawn;
+        GameManager.GameOverEvent += DestroyCat;
+        GameManager.ReviveEvent += CatSpawn;
     }
 
     private void OnDestroy()
     {
         GameManager.GameStartEvent -= CatSpawn;
+        GameManager.GameOverEvent -= DestroyCat;
+        GameManager.ReviveEvent -= CatSpawn;
     }
 
     private void Update()
@@ -47,13 +53,13 @@ public class CatSpawner : MonoBehaviour
         if (GameManager.Instance.IsGameOver)
             return;
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
         {
             DropCat();
         }
-
-#if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0))
+#else
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             DropCat();
         }
@@ -61,7 +67,8 @@ public class CatSpawner : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Move();
+        if (isMove)
+            Move();
     }
 
     private void Move()
@@ -90,7 +97,10 @@ public class CatSpawner : MonoBehaviour
 
     private IEnumerator CatSpawnCoroutine()
     {
+        DestroyCat();
+
         yield return wait06;
+
         _cat = Instantiate(catPrefab, gameObject.transform);
         _cat.Init(order++);
     }
@@ -98,5 +108,11 @@ public class CatSpawner : MonoBehaviour
     public void CatSpawn()
     {
         StartCoroutine(CatSpawnCoroutine());
+    }
+
+    private void DestroyCat()
+    {
+        if (_cat != null)
+            Destroy(_cat.gameObject);
     }
 }

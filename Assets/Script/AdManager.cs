@@ -23,7 +23,11 @@ public class AdManager : MonoBehaviour
         });
     }
 
+#if UNITY_EDITOR
     private string _bannerId = "ca-app-pub-3940256099942544/6300978111";
+#else
+    private string _bannerId = "ca-app-pub-4419256594849951/9797640567";
+#endif
 
     private void LoadBanner()
     {
@@ -37,7 +41,11 @@ public class AdManager : MonoBehaviour
         _bannerAd.LoadAd(new AdRequest());
     }
 
+#if UNITY_EDITOR
     private string _frontId = "ca-app-pub-3940256099942544/1033173712";
+#else
+    private string _frontId = "ca-app-pub-4419256594849951/9181072202";
+#endif
 
     private void LoadFrontAd()
     {
@@ -80,7 +88,11 @@ public class AdManager : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     private string _rewardId = "ca-app-pub-3940256099942544/5224354917";
+#else
+    private string _rewardId = "ca-app-pub-4419256594849951/1605942314";
+#endif
 
     private void LoadRewardAd()
     {
